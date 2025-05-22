@@ -1,5 +1,6 @@
-📌 1. Domain Proyek
-Latar Belakang
+# Laporan Proyek Machine Learning - M Dai Bahtiar
+
+## 1. Domain Proyek
 Masalah dropout mahasiswa di perguruan tinggi merupakan isu penting yang berdampak luas, baik bagi institusi pendidikan maupun mahasiswa itu sendiri. Tingginya tingkat dropout dapat menyebabkan kerugian finansial bagi kampus, memengaruhi akreditasi dan reputasi institusi, serta menghambat perkembangan akademik dan karier mahasiswa di masa depan.
 
 Menurut Nurmalitasari et al. (2023), keputusan mahasiswa untuk berhenti kuliah dipengaruhi oleh berbagai faktor seperti kondisi akademik, stres, kebiasaan belajar, keterlibatan dalam aktivitas sosial, kondisi keluarga, hingga kondisi mental. Dengan memanfaatkan pendekatan machine learning, institusi pendidikan dapat membangun sistem prediksi yang mampu mengidentifikasi mahasiswa dengan risiko dropout lebih awal, sehingga intervensi pencegahan dapat dilakukan secara tepat waktu.
@@ -7,22 +8,19 @@ Menurut Nurmalitasari et al. (2023), keputusan mahasiswa untuk berhenti kuliah d
 Referensi:
 Nurmalitasari, Awang Long, Z., & Mohd Noor, M. F. (2023). Factors Influencing Dropout Students in Higher Education. Education Research International, 2023, Article ID 7704142. https://doi.org/10.1155/2023/7704142
 
-📌 2. Business Understanding
-Problem Statements
+## 2. Business Understanding
+### Problem Statements
 Bagaimana cara memprediksi mahasiswa yang berisiko dropout berdasarkan data kebiasaan, performa akademik, kondisi sosial, dan faktor personal lainnya?
 
-Goals
+### Goals
 Membangun model machine learning yang mampu memprediksi risiko dropout mahasiswa dengan performa optimal, khususnya dalam hal recall dan F1-score.
 
-Solution Statements
+### Solution Statements
+- Mengimplementasikan beberapa algoritma klasifikasi seperti Logistic Regression, Random Forest, dan XGBoost untuk membandingkan performa model.
+- Melakukan hyperparameter tuning untuk meningkatkan performa model baseline.
+- Memilih model terbaik berdasarkan metrik F1-Score dan Recall, karena isu dropout biasanya menghadapi masalah data imbalance.
 
-Mengimplementasikan beberapa algoritma klasifikasi seperti Logistic Regression, Random Forest, dan XGBoost untuk membandingkan performa model.
-
-Melakukan hyperparameter tuning untuk meningkatkan performa model baseline.
-
-Memilih model terbaik berdasarkan metrik F1-Score dan Recall, karena isu dropout biasanya menghadapi masalah data imbalance.
-
-📌 3. Data Understanding
+## 3. Data Understanding
 Informasi Dataset
 
 Jumlah Data: 80.000 data mahasiswa
@@ -68,92 +66,111 @@ Variabel / Fitur Data:
 | `exam_score`                    | Nilai rata-rata ujian terkini.                            |
 
 
-Exploratory Data Analysis (EDA):
+## 4. Exploratory Data Analysis (EDA):
 
-Visualisasi distribusi fitur numerik & kategorikal.
+### Visualisasi distribusi fitur numerik
+![image](https://github.com/user-attachments/assets/940dc060-fcdd-446f-80e7-3708377bb276)
+![image](https://github.com/user-attachments/assets/7f3180fb-6c71-4359-abb0-e21afe818f1d)
+
+### visualisasi pairplot dari semua fitur numerik dalam dataset
+![image](https://github.com/user-attachments/assets/f96c60c9-6b07-4c6c-b1af-13b3c29db697)
+![image](https://github.com/user-attachments/assets/f4583b1f-647b-45ce-81e1-b5dd301cecf8)
+
+### Visualisasi distribusi fitur kategorikal
+![image](https://github.com/user-attachments/assets/f8e60100-ab08-41f5-ada1-dded545f5a22)
+![image](https://github.com/user-attachments/assets/c03b46c4-5d8c-4442-b94e-accb41480e29)
+![image](https://github.com/user-attachments/assets/20cc1889-7691-4be4-b6a8-f80767074421)
+![image](https://github.com/user-attachments/assets/7035b5bb-3591-4ea8-a5ff-a0b56eee526b)
+![image](https://github.com/user-attachments/assets/c62cce16-9353-4d50-a1ff-14bb186a27e0)
+![image](https://github.com/user-attachments/assets/3b06bae3-dca3-40d7-a919-63245cf532b7)
+
 
 Analisis korelasi antar fitur numerik.
+![image](https://github.com/user-attachments/assets/bda834ee-5c90-4207-a5e7-8e82417b588b)
 
-Analisis distribusi label dropout_risk.
+## 5. Data Preprocessing
+Setelah menilai data dari tahap Data Understanding. Maka beberapa tahapan Data Preparation sebagai berikut:
 
-📌 4. Data Preparation
-Langkah-langkah:
+1. Menangani Outliers - Melakukan filtering atau menggunakan metode IQR (Interquartile Range) untuk menghapus data di luar batas wajar. Outliers dapat menyebabkan model salah belajar karena mereka mendominasi pola data
+2. Encoding Data Kategorikal - Mengubah fitur kategorikal menjadi angka dengan LabelEncoder agar bisa diproses model. Disimpan juga encoder-nya di label_encoders untuk dipakai saat prediksi data baru.
+Hasil: Data kategorikal → angka. Data siap lanjut ke tahap scaling.
+3. Standarisasi - Melakukan standarisasi menggunakan StandarScaler pada fitur numeric. Standarisasi penting untuk menghindari fitur dengan skala besar mendominasi perhitungan dalam algritma machine learnin
+4. Splitting Dataset - Mengambil beberapa fitur penting yang dilihat dari correlation matrix, kemudian membagi dataset menjadi data latih (training) dan data uji (testing) dengan rasio umum seperti 80:20. SPlitting penting agar model bisa diuji keandalannya dalam memprediksi data baru yang belum dilihat
 
-Menangani missing value dengan median (numerik) & modus (kategori).
+## 6. Modelling
 
-Encoding data kategorikal dengan One Hot Encoding.
+Tiga algoritma digunakan dalam pemodelan:
+- Logistic Regression: Model baseline yang cepat dan sederhana, cocok untuk interpretasi awal.
+- Random Forest: Model ensemble yang tangguh terhadap overfitting dan menangani fitur non-linear.
+- SVM: Cocok untuk data dengan margin yang jelas dan kelas yang tidak seimbang.
 
-Normalisasi fitur numerik menggunakan MinMaxScaler.
+Setiap model dilatih menggunakan data training, kemudian dievaluasi pada data testing. Parameter default digunakan untuk baseline, tanpa hyperparameter tuning.
 
-Split data menjadi 80% train dan 20% test.
+### Kelebihan & Kekurangan:
+- Logistic Regression: Cepat, mudah diinterpretasi, tapi kurang bagus jika hubungan fitur tidak linear.
+- Random Forest: Akurat, robust, tapi lebih kompleks dan butuh lebih banyak sumber daya.
+- SVM: Akurat pada dataset kecil, tapi lambat pada dataset besar.
 
-Mengatasi data imbalance menggunakan SMOTE.
+#### Evaluasi
 
-Alasan:
+Model dievaluasi menggunakan metrik:
+- Accuracy: Persentase prediksi benar dari total prediksi.
+- Precision: Seberapa akurat model dalam memprediksi dropout.
+- Recall: Seberapa baik model menangkap semua kasus dropout.
+- F1-score: Harmonik antara precision dan recall.
 
-Menghindari bias akibat missing value.
+#### Hasil evaluasi:
+![image](https://github.com/user-attachments/assets/6789c274-d953-4037-840c-9e649d65ae03)
+#### Model Random Forest menunjukkan performa terbaik secara keseluruhan, khususnya pada recall dan F1-score, yang menjadi fokus utama proyek ini karena penting untuk mendeteksi sebanyak mungkin mahasiswa yang berisiko dropout.
 
-Menyamakan skala fitur untuk meningkatkan performa model.
 
-Mengurangi risiko model bias akibat imbalance class.
+#### Mengubah hasil evaluasi dari semua model menjadi DataFrame, lalu menampilkannya dalam bentuk tabel agar mudah dibandingkan.
+![image](https://github.com/user-attachments/assets/a02e5879-7cc1-40f0-8c9c-ff25f8e361df)
 
-📌 5. Modeling
-Algoritma yang Digunakan:
+#### Visualisasi Perbandingan Metrik
+Menampilkan grafik batang untuk membandingkan nilai metrik evaluasi (Accuracy, Precision, Recall, F1-Score) dari setiap model secara visual.
+![image](https://github.com/user-attachments/assets/5bb44245-bc78-4899-ac4c-1ded351f9d65)
 
-Logistic Regression
+#### Hasil Evaluasi Model
+Setelah melatih ketiga model — Logistic Regression, Random Forest, dan Support Vector Machine (SVM) — kami melakukan evaluasi terhadap kinerja masing-masing menggunakan empat metrik utama: Accuracy, Precision, Recall, dan F1-Score. Berikut adalah hasil evaluasi lengkap:
 
-Random Forest Classifier
+- Model Logistic Regression memperoleh accuracy sebesar 99.30%, precision sebesar 99.28%, recall sebesar 99.30%, dan F1-score sebesar 99.29%.
+- Model Random Forest menunjukkan performa sempurna dengan nilai 100% untuk keempat metrik: accuracy, precision, recall, dan F1-score.
+- Model SVM juga menghasilkan performa sangat tinggi dengan accuracy sebesar 99.25%, precision sebesar 99.21%, recall sebesar 99.25%, dan F1-score sebesar 99.20%.
 
-XGBoost Classifier
+#### Interpretasi Hasil
+Dari hasil evaluasi di atas, Random Forest menunjukkan performa terbaik di antara ketiga model pada semua metrik evaluasi utama. Model ini mencapai akurasi sempurna sebesar 100%, serta memiliki precision, recall, dan F1-score yang maksimal tanpa kesalahan klasifikasi sama sekali.
 
-Parameter yang Dicoba:
+Model ini memiliki 100% precision, yang berarti seluruh kasus yang diprediksi sebagai dropout benar-benar kasus dropout. Selain itu, dengan 100% recall, Random Forest berhasil mendeteksi seluruh mahasiswa yang benar-benar berisiko dropout tanpa ada yang terlewat. F1-score sebesar 100% mengindikasikan keseimbangan sempurna antara precision dan recall.
 
-Logistic Regression: C (regularization strength)
+Sementara itu, Logistic Regression dan SVM juga menunjukkan performa sangat baik, meskipun masih terdapat sedikit kesalahan prediksi. Logistic Regression menempati posisi kedua dengan F1-score sebesar 99.29%, diikuti oleh SVM dengan F1-score 99.20%.
 
-Random Forest: n_estimators, max_depth
+### Confusion Matrix
+#### Model Logistic Regression menghasilkan confusion matrix sebagai berikut:
+- Benar Negatif (True Negative): 15.310 kasus mahasiswa yang tidak dropout diklasifikasikan dengan benar.
+- Benar Positif (True Positive): 228 kasus mahasiswa dropout diklasifikasikan dengan benar.
+- False Positive: 44 kasus mahasiswa yang tidak dropout namun salah diprediksi sebagai dropout.
+- False Negative: 65 kasus mahasiswa dropout yang salah diprediksi sebagai tidak dropout.
 
-XGBoost: learning_rate, max_depth, n_estimators
+#### Model Random Forest menghasilkan hasil yang sempurna:
+- Benar Negatif (True Negative): 15.354 kasus benar.
+- Benar Positif (True Positive): 293 kasus benar.
+- False Positive: 0.
+- False Negative: 0.
 
-Kelebihan & Kekurangan:
+#### Model SVM menghasilkan:
+- Benar Negatif (True Negative): 15.334 kasus benar.
+- Benar Positif (True Positive): 196 kasus benar.
+- False Positive: 20 kasus salah prediksi dropout.
+- False Negative: 97 kasus dropout yang tidak terdeteksi.
 
-Algoritma	Kelebihan	Kekurangan
-Logistic Regression	Interpretasi hasil mudah	Kurang cocok untuk data non-linear
-Random Forest	Stabil, tangguh terhadap missing & outlier	Waktu komputasi tinggi saat tuning
-XGBoost	Akurasi tinggi, efisien untuk data besar	Rawan overfitting jika tidak dituning
+## Kesimpulan
+Berdasarkan hasil evaluasi, Random Forest dipilih sebagai model terbaik untuk kasus ini karena memiliki performa paling tinggi dan tanpa kesalahan klasifikasi sama sekali. Meskipun Logistic Regression dan SVM juga memberikan hasil yang sangat baik, Random Forest lebih unggul secara mutlak.
 
-Improvement:
+Model ini sangat direkomendasikan untuk digunakan dalam sistem prediksi risiko dropout mahasiswa karena mampu mendeteksi kasus dropout secara akurat dan konsisten. Ke depannya, model ini dapat tetap ditingkatkan melalui uji coba pada data baru dan penerapan teknik ensemble atau hyperparameter tuning guna memastikan performanya tetap optimal di berbagai kondisi.
 
-Hyperparameter tuning menggunakan GridSearchCV.
 
-Oversampling menggunakan SMOTE.
 
-Model Terbaik:
-Model dengan metrik F1-Score dan Recall tertinggi pada data test, misal: XGBoost.
-
-📌 6. Evaluation
-Metrik Evaluasi yang Digunakan:
-
-Accuracy: Persentase prediksi yang benar.
-
-Precision: Proporsi prediksi dropout yang benar.
-
-Recall: Proporsi dropout yang berhasil terdeteksi.
-
-F1-Score: Harmonic mean dari precision dan recall.
-
-Alasan Pemilihan Metrik:
-Karena data dropout biasanya imbalance, Recall dan F1-Score lebih penting agar tidak banyak kasus dropout yang tidak terdeteksi.
-
-Formula:
-
-Precision = TP / (TP + FP)
-
-Recall = TP / (TP + FN)
-
-F1-Score = 2 × (Precision × Recall) / (Precision + Recall)
-
-Hasil Evaluasi:
-![image](https://github.com/user-attachments/assets/62094aa0-73a4-4221-9080-efc3e90da6aa)
 
 
 

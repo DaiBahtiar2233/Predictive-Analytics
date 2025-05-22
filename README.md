@@ -150,6 +150,8 @@ Recall = TP / (TP + FN)
 F1-Score = 2 × (Precision × Recall) / (Precision + Recall)
 
 Hasil Evaluasi:
+![image](https://github.com/user-attachments/assets/62094aa0-73a4-4221-9080-efc3e90da6aa)
+
 
 
 

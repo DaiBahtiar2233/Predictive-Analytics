@@ -33,37 +33,40 @@ Sumber Dataset:
 https://www.kaggle.com/datasets/nishantbhujel/enhanced-student-habits-performance-dataset
 
 Variabel / Fitur Data:
-- student_id
-- age
-- gender
-- major
-- study_hours_per_day
-- social_media_hours
-- netflix_hours
-- part_time_job
-- attendance_percentage
-- sleep_hours
-- diet_quality
-- exercise_frequency
-- parental_education_level
-- internet_quality
-- mental_health_rating
-- extracurricular_participation
-- previous_gpa
-- semester
-- stress_level
-- dropout_risk (Label)
-- social_activity
-- screen_time
-- study_environment
-- access_to_tutoring
-- family_income_range
-- parental_support_level
-- motivation_level
-- exam_anxiety_score
-- learning_style
-- time_management_score
-- exam_score
+| Nama Fitur                      | Deskripsi                                                 |
+| :------------------------------ | :-------------------------------------------------------- |
+| `student_id`                    | ID unik untuk setiap mahasiswa.                           |
+| `age`                           | Usia mahasiswa (dalam tahun).                             |
+| `gender`                        | Jenis kelamin mahasiswa (Male/Female/Other).              |
+| `major`                         | Program studi atau jurusan mahasiswa.                     |
+| `study_hours_per_day`           | Rata-rata jam belajar mahasiswa per hari.                 |
+| `social_media_hours`            | Rata-rata jam penggunaan media sosial per hari.           |
+| `netflix_hours`                 | Rata-rata jam menonton Netflix per hari.                  |
+| `part_time_job`                 | Status mahasiswa memiliki pekerjaan paruh waktu (Yes/No). |
+| `attendance_percentage`         | Persentase kehadiran mahasiswa di kelas.                  |
+| `sleep_hours`                   | Rata-rata jam tidur per hari.                             |
+| `diet_quality`                  | Kualitas pola makan mahasiswa (Poor/Fair/Good).           |
+| `exercise_frequency`            | Frekuensi olahraga per minggu (0-7 kali).                 |
+| `parental_education_level`      | Tingkat pendidikan tertinggi orang tua mahasiswa.         |
+| `internet_quality`              | Kualitas koneksi internet mahasiswa (Poor/Fair/Good).     |
+| `mental_health_rating`          | Self-assessment kondisi mental (1-10).                    |
+| `extracurricular_participation` | Keikutsertaan dalam kegiatan ekstrakurikuler (Yes/No).    |
+| `previous_gpa`                  | Nilai IPK semester sebelumnya.                            |
+| `semester`                      | Semester saat data diambil (1-8).                         |
+| `stress_level`                  | Tingkat stres mahasiswa (Low/Medium/High).                |
+| `dropout_risk`                  | Label target, risiko dropout (Yes/No).                    |
+| `social_activity`               | Frekuensi kegiatan sosial per minggu.                     |
+| `screen_time`                   | Rata-rata total waktu menatap layar per hari (jam).       |
+| `study_environment`             | Kondisi lingkungan belajar (Poor/Average/Good).           |
+| `access_to_tutoring`            | Akses ke bimbingan belajar (Yes/No).                      |
+| `family_income_range`           | Rentang pendapatan keluarga (Low/Medium/High).            |
+| `parental_support_level`        | Tingkat dukungan orang tua (Low/Medium/High).             |
+| `motivation_level`              | Tingkat motivasi belajar (1-10).                          |
+| `exam_anxiety_score`            | Tingkat kecemasan saat ujian (1-10).                      |
+| `learning_style`                | Gaya belajar mahasiswa (Visual/Auditory/Kinesthetic).     |
+| `time_management_score`         | Nilai kemampuan manajemen waktu (1-10).                   |
+| `exam_score`                    | Nilai rata-rata ujian terkini.                            |
+
 
 Exploratory Data Analysis (EDA):
 
